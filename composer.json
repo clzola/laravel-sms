@@ -1,5 +1,5 @@
 {
-  "name": "clzola/sms",
+  "name": "clzola/laravel-sms",
   "description": "Sms component for Laravel framework to easily send Sms.",
   "type": "library",
   "version": "1.0.0",

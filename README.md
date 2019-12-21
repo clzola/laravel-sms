@@ -12,7 +12,7 @@ Example:
 
 You can install this package via composer using this command:
 
-    composer require "clzola/sms:^1.0.0"
+    composer require "clzola/laravel-sms:^1.0.0"
     
 The package will automatically register itself.
 
