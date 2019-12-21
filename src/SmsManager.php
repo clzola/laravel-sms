@@ -37,6 +37,6 @@ class SmsManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return "null";
+        return $this->config["sms.default"];
     }
 }
