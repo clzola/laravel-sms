@@ -22,6 +22,18 @@ class SmsManager extends Manager
 
 
     /**
+     * Registers driver instance.
+     *
+     * @param string $name
+     * @param \clzola\Components\Sms\Drivers\Driver $driver
+     */
+    public function registerDriver($name, $driver)
+    {
+        $this->drivers[$name] = $driver;
+    }
+
+
+    /**
      * Creates android emulator driver instance.
      *
      * @return AndroidEmulatorDriver
