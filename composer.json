@@ -2,6 +2,7 @@
   "name": "clzola/sms",
   "description": "Sms component for Laravel framework to easily send Sms.",
   "type": "library",
+  "version": "1.0.0",
   "keywords": [
     "laravel",
     "laravel 6",
