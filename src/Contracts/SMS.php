@@ -7,7 +7,7 @@ interface SMS
     /**
      * Send the given message to given recipient.
      *
-     * @return mixed
+     * @return void
      */
     public function send();
 }
