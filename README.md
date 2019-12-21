@@ -97,18 +97,18 @@ SMS::to($company)->content($message)->send();
 ## Null Driver
 
 This driver has empty send() method and discards all messages. Can be useful in the beginning for testing and setting up project.
-To use this driver set `sms.default` to `'null'` or in your **.env** file set `SMS_DRIVE="null"`.
+To use this driver set `sms.default` to `'null'` or in your **.env** file set `SMS_DRIVER="null"`.
 
 ## Android Emulator Driver
 
 This driver can send sms messages to currently running emulator.
-To use this driver set `sms.default` to `'emulator'` or in your **.env** file set `SMS_DRIVE="emulator"`.
+To use this driver set `sms.default` to `'emulator'` or in your **.env** file set `SMS_DRIVER="emulator"`.
 Also do not forget to set Android SDK path in your .env file `SMS_ANDROID_SDK_PATH="~/path/to/androd/sdk"`
 
 ## Infobip Driver
 
 This driver can send actual sms messages to physical devices using [Infobip](https://www.infobip.com/) service.
-To use this driver set `sms.default` to `'infobip'` or in your **.env** file set `SMS_DRIVE="infobip"`.
+To use this driver set `sms.default` to `'infobip'` or in your **.env** file set `SMS_DRIVER="infobip"`.
 Also in your **config/services.php** add following configuration:
 
     "infobip" => [
