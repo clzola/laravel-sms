@@ -2,6 +2,7 @@
 
 namespace clzola\Components\Sms;
 
+use clzola\Components\Sms\Console\Commands\SendSms;
 use Illuminate\Support\ServiceProvider;
 
 class SmsServiceProvider extends ServiceProvider
@@ -33,6 +34,12 @@ class SmsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/sms.php' => config_path('sms.php'),
         ], 'config');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                SendSms::class,
+            ]);
+        }
     }
 
 
