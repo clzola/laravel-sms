@@ -23,6 +23,13 @@
   ],
   "minimum-stability": "dev",
   "prefer-stable": true,
+  "extra": {
+    "laravel": {
+      "providers": [
+        "clzola\\Components\\Sms\\SmsServiceProvider"
+      ]
+    }
+  },
   "config": {
     "sort-packages": true
   }
