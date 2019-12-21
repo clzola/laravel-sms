@@ -27,7 +27,10 @@
     "laravel": {
       "providers": [
         "clzola\\Components\\Sms\\SmsServiceProvider"
-      ]
+      ],
+      "aliases": {
+        "SMS": "clzola\\Components\\Sms\\Facade\\Sms"
+      }
     }
   },
   "config": {
