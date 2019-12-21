@@ -16,6 +16,10 @@ class SmsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/../config/sms.php', 'sms'
         );
+
+        $this->app->singleton('sms', function ($app) {
+            return new SmsManager($app);
+        });
     }
 
 
@@ -29,5 +33,16 @@ class SmsServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../config/sms.php' => config_path('sms.php'),
         ], 'config');
+    }
+
+
+    /**
+     * Get the services provided by provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['sms'];
     }
 }
