@@ -4,9 +4,11 @@ This package adds SMS component to your Laravel's projects. It supports few driv
 
 Example:
 
-    SMS::to($user)
-       ->content("Hi! Your order has been shipped!")
-       ->send();
+```php
+SMS::to($user)
+   ->content("Hi! Your order has been shipped!")
+   ->send();
+```
        
 ## Installation
 
@@ -22,67 +24,73 @@ You can publish the config-file with:
 
 This is the contents of the published config file:
 
-    return [
-    
+```php
+return [
+
+    /*
+     * Specify which database driver you want to use.
+     */
+    'default' => env('SMS_DRIVER', 'null'),
+
+
+    /*
+     * Specify sender name.
+     */
+    'from' => env('SMS_FROM', 'Laravel'),
+
+
+    /*
+     * List of drivers and theirs configurations.
+     */
+    'drivers' => [
+
         /*
-         * Specify which database driver you want to use.
+         * Driver for sending sms messages to running emulator.
          */
-        'default' => env('SMS_DRIVER', 'null'),
-    
-    
-        /*
-         * Specify sender name.
-         */
-        'from' => env('SMS_FROM', 'Laravel'),
-    
-    
-        /*
-         * List of drivers and theirs configurations.
-         */
-        'drivers' => [
-    
+        'emulator' => [
+
             /*
-             * Driver for sending sms messages to running emulator.
+             * Specify Android SDK path
              */
-            'emulator' => [
-    
-                /*
-                 * Specify Android SDK path
-                 */
-                'android_sdk_path' => env('SMS_ANDROID_SDK_PATH'),
-    
-            ]
-    
+            'android_sdk_path' => env('SMS_ANDROID_SDK_PATH'),
+
         ]
-        
-    ];
+
+    ]
+    
+];
+```
     
 # Usage
 
 This package exposes SMS facade. You specify recipient and content of the message and call `send()`:
 
-    SMS::to($user)->content($message)->send();
+```php
+SMS::to($user)->content($message)->send();
+```
     
 Recipient of the message can be a valid phone number or any entity that implements `clzola\Components\Sms\Contracts\HasPhoneNumber` contract.
 
 Example:
 
-    use clzola\Components\Sms\Contracts\HasPhoneNumber;
-    
-    class Company extends Model implements HasPhoneNumber 
-    {
-        // ...
-        
-        public function getPhoneNumber()
-        {
-            return $this->phone_number;
-        }  
-    }
-    
+```php
+use clzola\Components\Sms\Contracts\HasPhoneNumber;
+
+class Company extends Model implements HasPhoneNumber 
+{
     // ...
     
-    $company = Company::find(3);
-    SMS::to($company)->content($message)->send();
+    public function getPhoneNumber()
+    {
+        return $this->phone_number;
+    }  
+}
+
+// ...
+
+$company = Company::find(3);
+SMS::to($company)->content($message)->send();
+```
     
 # Supported drivers
 
@@ -113,32 +121,36 @@ For now this package supports few drivers but you can register your own drivers.
 
 First make sure that your driver extends `clzola\Components\Sms\Drivers\Driver` class and implements `send()` method.
 
-    use clzola\Components\Sms\Drivers\Driver;
+```php
+use clzola\Components\Sms\Drivers\Driver;
+
+class CustomSmsDriver extends Driver 
+{
     
-    class CustomSmsDriver extends Driver {
-        
-        // ...
-        
-        public function send()
-        {
-            // Write code to send SMS message
-        }
+    // ...
     
+    public function send()
+    {
+        // Write code to send SMS message
     }
+}
+```
  
 Next open your `AppServiceProvider` and in `boot()` method register this driver:
  
-    class AppServiceProvider extends ServiceProvider
+```php
+class AppServiceProvider extends ServiceProvider
+{
+    // ...
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
     {
-        // ...
-    
-        /**
-         * Bootstrap any application services.
-         *
-         * @return void
-         */
-        public function boot()
-        {
-            app("sms")->registerDriver("custom", new CustomSmsDriver(...));
-        }
+        app("sms")->registerDriver("custom", new CustomSmsDriver(...));
     }
+}
+```
