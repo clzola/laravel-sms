@@ -3,6 +3,7 @@
 namespace clzola\Components\Sms;
 
 use clzola\Components\Sms\Drivers\AndroidEmulatorDriver;
+use clzola\Components\Sms\Drivers\InfobipDriver;
 use clzola\Components\Sms\Drivers\NullDriver;
 use clzola\Components\Sms\Exceptions\SmsException;
 use Illuminate\Support\Manager;
@@ -30,6 +31,20 @@ class SmsManager extends Manager
     public function registerDriver($name, $driver)
     {
         $this->drivers[$name] = $driver;
+    }
+
+
+    /**
+     * Creates infobip driver instance.
+     *
+     * @return InfobipDriver
+     */
+    public function createInfobipDriver()
+    {
+        return new InfobipDriver(
+            $this->config["services.infobip.api_key"],
+            $this->config["sms.from"]
+        );
     }
 
 
