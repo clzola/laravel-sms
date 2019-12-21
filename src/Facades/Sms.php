@@ -4,7 +4,7 @@ namespace clzola\Components\Sms\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class Sms extends Facade
+class SMS extends Facade
 {
     /**
      * Get the registered name of the component.
